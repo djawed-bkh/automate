@@ -19,6 +19,7 @@ public class reconaissance implements CharSequence{
     //implementations de l'interface
 
     //initialisation
+    private boolean reessayer=true;
     private static String mot;
     public int ouv;
     Scanner sc=new Scanner(System.in);
@@ -46,18 +47,29 @@ public class reconaissance implements CharSequence{
                }
             i++;
             }
-            if (i==mot.length()){
+            if (ouv!=0){
+                System.out.println("mot non reconnue");
+            }else if (i==mot.length()){
                 System.out.println("mot reconnue");
             }else{
                 System.out.println("mot non reconnue");
             }
         }
+
     }
 
 
     public void lancement(){
-        entrée();
-        verification();
+        while(reessayer==true){
+            entrée();
+            verification();
+            System.out.println("recommencer ?  0=oui   1=non ");
+            int var=sc.nextInt();
+            if (var==1){
+                reessayer=false;
+            }
+        }
+
     }
 
 

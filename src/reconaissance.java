@@ -1,4 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class reconaissance implements CharSequence{
     //implementations de l'interface
@@ -23,6 +25,7 @@ public class reconaissance implements CharSequence{
     private static String mot;
     public int ouv;
     Scanner sc=new Scanner(System.in);
+    private Stack<Character>pile=new Stack<Character>();
     //initialisation
 
     public void entrée(){
@@ -31,7 +34,47 @@ public class reconaissance implements CharSequence{
     }
 
     public void verification(){
-        ouv=0;
+int i=0;
+        if (mot.charAt(0)==')'){
+            System.out.println("mot non reconnue");
+        }else{
+            while (i<mot.length() && /* &&*/(mot.charAt(i)==')' || mot.charAt(i)=='(')){
+                if (mot.charAt(i)=='('){
+                    pile.push(')');
+                }else if(mot.charAt(i)==')' && !(pile.empty())){
+                    pile.pop();
+                }else if (mot.charAt(i)==')' && (pile.empty())){
+                    System.out.println("mot non reconnue");
+                }
+                i++;
+            }
+            if (pile.empty()){
+                System.out.println("mot reconnue");
+            }else{
+                System.out.println("mot non reconnue ");
+            }
+        }
+
+    }
+
+
+    public void lancement(){
+        while(reessayer==true){
+            entrée();
+            verification();
+            pile.clear();
+            System.out.println("recommencer ?  0=oui   1=non ");
+            int var=sc.nextInt();
+            if (var==1){
+                reessayer=false;
+            }
+        }
+
+    }
+
+
+
+ /* ouv=0;
         int i=0;
         if (mot.charAt(0)==')'){
             System.out.println("mot non reconnue");
@@ -54,26 +97,7 @@ public class reconaissance implements CharSequence{
             }else{
                 System.out.println("mot non reconnue");
             }
-        }
-
-    }
-
-
-    public void lancement(){
-        while(reessayer==true){
-            entrée();
-            verification();
-            System.out.println("recommencer ?  0=oui   1=non ");
-            int var=sc.nextInt();
-            if (var==1){
-                reessayer=false;
-            }
-        }
-
-    }
-
-
-
+        }*/
 
 
 
